@@ -15,12 +15,15 @@ import {
   Vector3,
 } from "three";
 import { pages } from "../constants/Constants";
+import { degToRad, MathUtils } from "three/src/math/MathUtils.js";
 
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.71;
 const PAGE_DEPTH = 0.003;
 const PAGE_SEGMENTS = 30;
 const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS;
+
+const lerpFactor = 0.05;
 
 const pageGeomety = new BoxGeometry(
   PAGE_WIDTH,
@@ -78,7 +81,7 @@ pages.forEach((page) => {
   useTexture.preload(`/textures/book-cover-roughness.jpg`);
 });
 
-function Page({ number, front, back, page, ...props }) {
+function Page({ number, front, back, page, opened, bookClosed, ...props }) {
   const [pictureFront, pictureBack, pictureRoughness] = useTexture([
     `/textures/${front}.jpg`,
     `/textures/${back}.jpg`,
@@ -86,6 +89,7 @@ function Page({ number, front, back, page, ...props }) {
       ? [`/textures/book-cover-roughness.jpg`]
       : []),
   ]);
+  pictureFront.colorSpace = pictureBack.colorSpace = SRGBColorSpace;
   const group = useRef();
   const SkinnedMeshRef = useRef();
 
@@ -132,7 +136,18 @@ function Page({ number, front, back, page, ...props }) {
 
   useFrame(() => {
     if (!SkinnedMeshRef.current) return;
+
+    let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
     const bones = SkinnedMeshRef.current.skeleton.bones;
+    if (!bookClosed) {
+      targetRotation += degToRad(number * 0.8);
+    }
+
+    bones[0].rotation.y = MathUtils.lerp(
+      bones[0].rotation.y,
+      targetRotation,
+      lerpFactor
+    );
   });
 
   return (

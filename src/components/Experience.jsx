@@ -5,10 +5,10 @@ export const Experience = () => {
     <>
       <Book />
       <OrbitControls />
-      <Environment preset="sunset"></Environment>
+      <Environment preset="warehouse"></Environment>
       <directionalLight
         position={[2, 5, 2]}
-        intensity={0.2}
+        intensity={2}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
