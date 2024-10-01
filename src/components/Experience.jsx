@@ -3,7 +3,6 @@ import Book from "./Book";
 export const Experience = () => {
   return (
     <>
-      <Book />
       <OrbitControls />
       <Environment preset="warehouse"></Environment>
       <directionalLight
@@ -18,6 +17,7 @@ export const Experience = () => {
         <planeGeometry args={[100, 100]} />
         <shadowMaterial transparent opacity={0.2} />
       </mesh>
+      <Book />
     </>
   );
 };

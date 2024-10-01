@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import { UI } from "./components/UI";
 import { Experience } from "./components/Experience";
 
-
 function App() {
   return (
     <>

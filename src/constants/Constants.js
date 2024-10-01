@@ -19,7 +19,7 @@ export const pictures = [
   "DSC02069",
 ];
 
-export const pageAtom = atom(0);
+export const currentPageAtom = atom(0);
 export const pages = [];
 pages.push({
   front: "book-cover",

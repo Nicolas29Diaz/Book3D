@@ -1,19 +1,30 @@
 import { useAtom } from "jotai";
-import { pageAtom, pages } from "../constants/Constants";
+import { pages, currentPageAtom } from "../constants/Constants";
 import Page from "./Page";
+// import { useEffect, useState } from "react";
 
 function Book({ ...props }) {
-  const [page] = useAtom(pageAtom);
+  const [currentPage] = useAtom(currentPageAtom);
+
+  // const [delayedPage, setDelayedPage] = useState(currentPage);
+
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setDelayedPage(currentPage);
+  //   }, 1000);
+  //   return () => clearTimeout(timeout);
+  // }, [currentPage]);
+
   return (
     <group {...props} rotation-y={-Math.PI / 2}>
       {[...pages].map((pageData, index) => (
         <Page
           key={index}
-          number={index}
+          pageNumber={index}
           {...pageData}
-          page={page}
-          opened={page > index}
-          bookClosed={page === 0 || page === pages.length}
+          currentPage={currentPage}
+          pageOpened={currentPage > index}
+          bookClosed={currentPage === 0 || currentPage === pages.length}
         />
       ))}
     </group>

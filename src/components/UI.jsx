@@ -1,8 +1,8 @@
-import { pageAtom, pages } from "../constants/Constants";
+import { currentPageAtom, pages } from "../constants/Constants";
 import { useAtom } from "jotai";
 
 export const UI = () => {
-  const [page, setPage] = useAtom(pageAtom);
+  const [currentPage, setCurrentPage] = useAtom(currentPageAtom);
 
   return (
     <>
@@ -19,23 +19,23 @@ export const UI = () => {
               {[...pages].map((_, index) => (
                 <button
                   key={index}
-                  className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3  rounded-full  text-lg uppercase shrink-0 border ${
-                    index === page
+                  className={`border-transparent hover:border-white transition-all duration-300  px-4 py-2  rounded-full  text-lg uppercase shrink-0 border ${
+                    index === currentPage
                       ? "bg-white/90 text-black"
                       : "bg-black/30 text-white"
                   }`}
-                  onClick={() => setPage(index)}
+                  onClick={() => setCurrentPage(index)}
                 >
-                  {index === 0 ? "Cover" : `Page ${index}`}
+                  {index === 0 ? "Cover" : `${index}`}
                 </button>
               ))}
               <button
                 className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
-                  page === pages.length
+                  currentPage === pages.length
                     ? "bg-white/90 text-black"
                     : "bg-black/30 text-white"
                 }`}
-                onClick={() => setPage(pages.length)}
+                onClick={() => setCurrentPage(pages.length)}
               >
                 Back Cover
               </button>
