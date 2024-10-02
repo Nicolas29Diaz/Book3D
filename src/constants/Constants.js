@@ -10,7 +10,7 @@ export const generatePages = (pictures) => {
 
   // Primera página (portada)
   pages.push({
-    front: "/textures/book-cover.jpg",
+    front: "/textures/BackCover.webp",
     back: pictures[0],
   });
 
@@ -25,7 +25,7 @@ export const generatePages = (pictures) => {
   // Última página (contraportada)
   pages.push({
     front: pictures[pictures.length - 1],
-    back: "/textures/book-back.jpg",
+    back: "/textures/BackCover.webp",
   });
 
   return pages;

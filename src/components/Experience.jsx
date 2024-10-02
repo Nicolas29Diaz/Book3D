@@ -4,10 +4,10 @@ export const Experience = () => {
   return (
     <>
       <OrbitControls />
-      <Environment preset="warehouse"></Environment>
+      <Environment preset="sunset"></Environment>
       <directionalLight
         position={[2, 5, 2]}
-        intensity={2}
+        intensity={1}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}

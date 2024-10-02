@@ -28,8 +28,10 @@ function Page({
   const [pictureFront, pictureBack, pictureRoughness] = useTexture([
     front,
     back,
-    ...(pageNumber === 0 || pageNumber === pages.length - 1
-      ? [`/textures/book-cover-roughness.jpg`]
+    ...(pageNumber === 0
+      ? [`/textures/RoughnessBack.webp`]
+      : pageNumber === pages.length - 1
+      ? [`/textures/RoughnessBack.webp`]
       : []),
   ]);
   pictureFront.colorSpace = pictureBack.colorSpace = SRGBColorSpace;
