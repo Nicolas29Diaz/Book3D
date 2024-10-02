@@ -65,23 +65,6 @@ export const manualSkinnedMesh = (pageMaterials) => {
     }
   }
   const skeleton = new Skeleton(bones);
-  //   const materials = [
-  //     ...pageMaterials,
-  //     new MeshStandardMaterial({
-  //       color: whiteColor,
-  //       map: pictureFront,
-  //       ...(number === 0
-  //         ? { roughnessMap: pictureRoughness }
-  //         : { roughness: 0.1 }),
-  //     }),
-  //     new MeshStandardMaterial({
-  //       color: whiteColor,
-  //       map: pictureBack,
-  //       ...(number === pages.length - 1
-  //         ? { roughnessMap: pictureRoughness }
-  //         : { roughness: 0.1 }),
-  //     }),
-  //   ];
   const materials = pageMaterials;
   const mesh = new SkinnedMesh(pageGeomety, materials);
   mesh.castShadow = true;

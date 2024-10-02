@@ -15,7 +15,7 @@ export const pageTransition = (
   const insideCurveStrength = 0.18;
   const outsideCurveStrength = 0.05;
   const turningCurveStrength = 0.09;
-  const easingFactorFold = 0.3;
+  const easingFactorFold = 0.5;
 
   if (!skinnedMeshRef.current) return;
 

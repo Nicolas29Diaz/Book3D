@@ -1,39 +1,32 @@
 import { atom } from "jotai";
 
-export const pictures = [
-  "DSC00680",
-  "DSC00933",
-  "DSC00966",
-  "DSC00983",
-  "DSC01011",
-  "DSC01040",
-  "DSC01064",
-  "DSC01071",
-  "DSC01103",
-  "DSC01145",
-  "DSC01420",
-  "DSC01461",
-  "DSC01489",
-  "DSC02031",
-  "DSC02064",
-  "DSC02069",
-];
-
+// Definir átomos
 export const currentPageAtom = atom(0);
-export const pages = [];
-pages.push({
-  front: "book-cover",
-  back: pictures[0],
-});
+export const pagesAtom = atom([]);
 
-for (let i = 1; i < pictures.length - 1; i += 2) {
+// Función para generar páginas
+export const generatePages = (pictures) => {
+  const pages = [];
+
+  // Primera página (portada)
   pages.push({
-    front: pictures[i], //front: pictures[i % pictures.length],
-    back: pictures[i + 1], // back: pictures[(i + 1) % pictures.length],
+    front: "/textures/book-cover.jpg",
+    back: pictures[0],
   });
-}
 
-pages.push({
-  front: pictures[pictures.length - 1],
-  back: "book-back",
-});
+  // Páginas interiores
+  for (let i = 1; i < pictures.length - 1; i += 2) {
+    pages.push({
+      front: pictures[i],
+      back: pictures[i + 1],
+    });
+  }
+
+  // Última página (contraportada)
+  pages.push({
+    front: pictures[pictures.length - 1],
+    back: "/textures/book-back.jpg",
+  });
+
+  return pages;
+};

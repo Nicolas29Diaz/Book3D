@@ -2,17 +2,12 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
-import { pages } from "../constants/Constants";
-import { PAGE_DEPTH, manualSkinnedMesh } from "./PageGeometry";
-import { pageMaterials } from "./PageMaterials";
+import { pagesAtom } from "../constants/Constants";
+import { PAGE_DEPTH, manualSkinnedMesh } from "../constants/PageGeometry";
+import { pageMaterials } from "../constants/PageMaterials";
 import { SRGBColorSpace } from "three";
-import { pageTransition } from "./PageTransition";
-
-pages.forEach((page) => {
-  useTexture.preload(`/textures/${page.front}.jpg`);
-  useTexture.preload(`/textures/${page.back}.jpg`);
-  useTexture.preload(`/textures/book-cover-roughness.jpg`);
-});
+import { pageTransition } from "../constants/PageTransition";
+import { useAtom } from "jotai";
 
 function Page({
   pageNumber,
@@ -23,9 +18,16 @@ function Page({
   bookClosed,
   ...props
 }) {
+  const [pages] = useAtom(pagesAtom);
+  // pages.forEach((page) => {
+  //   useTexture.preload(`/textures/${page.front}.jpg`);
+  //   useTexture.preload(`/textures/${page.back}.jpg`);
+  //   useTexture.preload(`/textures/book-cover-roughness.jpg`);
+  // });
+
   const [pictureFront, pictureBack, pictureRoughness] = useTexture([
-    `/textures/${front}.jpg`,
-    `/textures/${back}.jpg`,
+    front,
+    back,
     ...(pageNumber === 0 || pageNumber === pages.length - 1
       ? [`/textures/book-cover-roughness.jpg`]
       : []),
