@@ -10,7 +10,7 @@ export const generatePages = (pictures) => {
 
   // Primera página (portada)
   pages.push({
-    front: "/textures/BackCover.webp",
+    front: "/textures/FrontCover.webp",
     back: pictures[0],
   });
 

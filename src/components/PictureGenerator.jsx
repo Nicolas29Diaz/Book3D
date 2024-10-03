@@ -30,8 +30,12 @@ const generateCanvasTexture = (data, index, height = 1000, width = 750) => {
       context.textBaseline = "bottom"; // Establecer la línea base en la parte inferior
       if (index % 2 === 0) {
         context.fillText(data.name, 50, 140);
+        context.font = "bold 40px Arial";
+        context.fillText(data.ki, 50, 220);
       } else {
         context.fillText(data.name, 450, 140);
+        context.font = "bold 40px Arial";
+        context.fillText(data.ki, 450, 220);
       }
 
       // Ahora que la imagen está dibujada, convertir el canvas a un URL de imagen

@@ -1,6 +1,7 @@
 import { Color, MeshStandardMaterial } from "three";
 
 const whiteColor = new Color("white");
+const emissiveColor = new Color("orange");
 
 export const pageMaterials = (
   pictureFront,
@@ -23,18 +24,20 @@ export const pageMaterials = (
       color: whiteColor,
     }),
     new MeshStandardMaterial({
-      color: whiteColor,
       map: pictureFront,
+      emissive: emissiveColor,
+      emissiveIntensity: 0,
       ...(pageNumber === 0
         ? { roughnessMap: pictureRoughness }
-        : { roughness: 0.1 }),
+        : { roughness: 0.4 }),
     }),
     new MeshStandardMaterial({
-      color: whiteColor,
       map: pictureBack,
+      emissive: emissiveColor,
+      emissiveIntensity: 0,
       ...(pageNumber === lastPageNumber
         ? { roughnessMap: pictureRoughness }
-        : { roughness: 0.1 }),
+        : { roughness: 0.4 }),
     }),
   ];
 };

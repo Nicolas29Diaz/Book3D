@@ -1,3 +1,4 @@
+// import { useEffect } from "react";
 import { currentPageAtom, pagesAtom } from "../constants/Constants";
 import { useAtom, useAtomValue } from "jotai";
 
@@ -5,20 +6,26 @@ export const UI = () => {
   const [currentPage, setCurrentPage] = useAtom(currentPageAtom);
   const pages = useAtomValue(pagesAtom);
 
+  // useEffect(() => {
+  //   const audio = new Audio("/audios/pageFlip.mp3");
+  //   audio.play();
+  // }, [currentPage]);
+
   return (
     <>
       <>
         <main className=" pointer-events-none select-none z-10 fixed  inset-0  flex justify-between flex-col">
           <a
-            className="pointer-events-auto mt-10 ml-10"
+            className="pointer-events-auto mt-10 ml-10 w-40"
             href="https://lessons.wawasensei.dev/courses/react-three-fiber"
           >
-            <img className="w-20" src="/images/wawasensei-white.png" />
+            <img className="w-40" src="/images/Logo.webp" />
           </a>
           <div className="w-full overflow-auto pointer-events-auto flex justify-center">
-            <div className="overflow-auto flex items-center gap-4 max-w-full p-10">
+            <div className="overflow-auto flex items-center gap-4 max-w-full pb-10 pl-10 p-r">
               {[...pages].map((_, index) => (
                 <button
+                  type="button"
                   key={index}
                   className={`border-transparent hover:border-white transition-all duration-300  px-4 py-2  rounded-full  text-lg uppercase shrink-0 border ${
                     index === currentPage

@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import { useTexture } from "@react-three/drei";
+import { useCursor, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
-import { pagesAtom } from "../constants/Constants";
+import { useMemo, useRef, useState } from "react";
+import { currentPageAtom, pagesAtom } from "../constants/Constants";
 import { PAGE_DEPTH, manualSkinnedMesh } from "../constants/PageGeometry";
 import { pageMaterials } from "../constants/PageMaterials";
 import { SRGBColorSpace } from "three";
 import { pageTransition } from "../constants/PageTransition";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 
 function Page({
   pageNumber,
@@ -29,9 +29,9 @@ function Page({
     front,
     back,
     ...(pageNumber === 0
-      ? [`/textures/RoughnessBack.webp`]
+      ? [`/textures/FrontRoughness.webp`]
       : pageNumber === pages.length - 1
-      ? [`/textures/RoughnessBack.webp`]
+      ? [`/textures/BackRoughness.webp`]
       : []),
   ]);
   pictureFront.colorSpace = pictureBack.colorSpace = SRGBColorSpace;
@@ -41,6 +41,10 @@ function Page({
   const turnedAt = useRef(0);
   const lastOpened = useRef(pageOpened);
   const lastPageNumber = pages.length - 1;
+  const [highlighted, setHighlighted] = useState(false);
+  const setCurrentPage = useSetAtom(currentPageAtom);
+
+  useCursor(highlighted);
 
   const pageSkinnedMesh = useMemo(() => {
     const materials = pageMaterials(
@@ -63,12 +67,28 @@ function Page({
       bookClosed,
       pageNumber,
       group,
+      highlighted,
       delta
     );
   });
 
   return (
-    <group {...props} ref={group}>
+    <group
+      {...props}
+      ref={group}
+      onPointerEnter={(e) => {
+        e.stopPropagation();
+        setHighlighted(true);
+      }}
+      onPointerLeave={(e) => {
+        e.stopPropagation();
+        setHighlighted(false);
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        setCurrentPage(pageOpened ? pageNumber : pageNumber + 1);
+      }}
+    >
       <primitive
         object={pageSkinnedMesh}
         ref={skinnedMeshRef}

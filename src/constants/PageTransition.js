@@ -1,5 +1,5 @@
 import { easing } from "maath";
-import { degToRad } from "three/src/math/MathUtils.js";
+import { degToRad, MathUtils } from "three/src/math/MathUtils.js";
 
 export const pageTransition = (
   skinnedMeshRef,
@@ -9,6 +9,7 @@ export const pageTransition = (
   bookClosed,
   pageNumber,
   group,
+  highlighted,
   delta
 ) => {
   const easingFactor = 0.5;
@@ -16,6 +17,14 @@ export const pageTransition = (
   const outsideCurveStrength = 0.05;
   const turningCurveStrength = 0.09;
   const easingFactorFold = 0.5;
+
+  const emissiveIntensity = highlighted ? 0.09 : 0;
+  skinnedMeshRef.current.material[4].emissiveIntensity =
+    skinnedMeshRef.current.material[5].emissiveIntensity = MathUtils.lerp(
+      skinnedMeshRef.current.material[4].emissiveIntensity,
+      emissiveIntensity,
+      0.1
+    );
 
   if (!skinnedMeshRef.current) return;
 
