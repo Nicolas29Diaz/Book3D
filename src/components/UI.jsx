@@ -17,7 +17,7 @@ export const UI = () => {
         <main className=" pointer-events-none select-none z-10 fixed  inset-0  flex justify-between flex-col">
           <a
             className="pointer-events-auto mt-10 ml-10 w-40"
-            href="https://lessons.wawasensei.dev/courses/react-three-fiber"
+            href=""
           >
             <img className="w-40" src="/images/Logo.webp" />
           </a>

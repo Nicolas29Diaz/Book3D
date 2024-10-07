@@ -3,11 +3,17 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { UI } from "./components/UI";
 import { Experience } from "./components/Experience";
-import { generatePages, pagesAtom } from "./constants/Constants";
+import { dataAtom, generatePages, pagesAtom } from "./constants/Constants";
 import PictureGenerator from "./components/PictureGenerator";
-import { useSetAtom } from "jotai";
-import { data } from "./constants/Data";
+import { useAtomValue, useSetAtom } from "jotai";
+import useFetch from "./hooks/useFetch";
+// import { data } from "./constants/Data";
+
 function App() {
+  useFetch("https://dragonball-api.com/api/characters");
+  const data = useAtomValue(dataAtom);
+  const [loading, setLoading] = useState(true);
+
   const [pictures, setPictures] = useState([]);
   const setPages = useSetAtom(pagesAtom);
 
@@ -16,10 +22,24 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (pictures.length === 0) return;
+    if (pictures.length === 0) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
 
-    setPages(generatePages(pictures));
-  }, [pictures, setPages]);
+    if (!loading) {
+      const pages = generatePages(pictures);
+      setPages(pages);
+      // console.log("pages", pages);
+    }
+  }, [pictures, loading, setPages]);
+
+  useEffect(() => {
+    // data.map((item) => {
+    //   console.log("item", item.race);
+    // });
+  }, [data]);
 
   return (
     <>

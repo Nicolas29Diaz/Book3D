@@ -18,7 +18,7 @@ export const pageTransition = (
   const turningCurveStrength = 0.09;
   const easingFactorFold = 0.5;
 
-  const emissiveIntensity = highlighted ? 0.09 : 0;
+  const emissiveIntensity = highlighted ? 0.025 : 0;
   skinnedMeshRef.current.material[4].emissiveIntensity =
     skinnedMeshRef.current.material[5].emissiveIntensity = MathUtils.lerp(
       skinnedMeshRef.current.material[4].emissiveIntensity,

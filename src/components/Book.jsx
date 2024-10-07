@@ -19,10 +19,10 @@ function Book({ ...props }) {
         () => {
           lastPage += lastPage < currentPage ? 1 : -1;
           setDelayedPage(lastPage);
-          console.log("Delayed page", lastPage);
+          // console.log("Delayed page", lastPage);
           if (lastPage === currentPage) {
             clearInterval(interval);
-            console.log("Cleared interval");
+            // console.log("Cleared interval");
           }
         },
         pageDiff > 7 ? 20 : pageDiff > 2 ? 80 : 150
