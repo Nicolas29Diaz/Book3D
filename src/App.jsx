@@ -10,7 +10,7 @@ import useFetch from "./hooks/useFetch";
 // import { data } from "./constants/Data";
 
 function App() {
-  useFetch("https://dragonball-api.com/api/characters");
+  useFetch("https://dragonball-api.com/api/characters?limit=18");
   const data = useAtomValue(dataAtom);
   const [loading, setLoading] = useState(true);
 
@@ -39,6 +39,8 @@ function App() {
     // data.map((item) => {
     //   console.log("item", item.race);
     // });
+    if (data.length === 0) return;
+    console.log("data", data[4].description);
   }, [data]);
 
   return (
