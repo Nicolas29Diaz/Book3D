@@ -15,6 +15,7 @@ export default {
       animation: {
         "horizontal-scroll": "horizontal-scroll linear 16s infinite ",
         "horizontal-scroll-2": "horizontal-scroll-2 linear 16s infinite ",
+        scaleOut: "scale-out 0.5s ease-in-out forwards",
       },
       keyframes: {
         "horizontal-scroll": {
@@ -24,6 +25,11 @@ export default {
         "horizontal-scroll-2": {
           from: { transform: "translateX(100%)" },
           to: { transform: "translateX(0)" },
+        },
+        "scale-out": {
+          "0%": { transform: "translate(-50%, -50%) scale(1)" },
+          "60%": { transform: "translate(-50%, -50%) scale(1.5)" },
+          "100%": { transform: "translate(-50%, -50%) scale(0)" },
         },
       },
     },
