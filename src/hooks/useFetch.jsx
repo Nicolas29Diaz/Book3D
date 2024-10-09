@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { dataAtom } from "../constants/Constants";
 
-const useFetch = (url) => {
+const useFetch = (
+  url = "https://dragonball-api.com/api/characters?limit=18"
+) => {
   const [, setData] = useAtom(dataAtom); // Desestructura el setter del atom
 
   useEffect(() => {

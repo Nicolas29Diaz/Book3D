@@ -11,7 +11,7 @@ import LoadingScreen from "./components/LoadingScreen";
 // import { data } from "./constants/Data";
 
 function App() {
-  useFetch("https://dragonball-api.com/api/characters?limit=18");
+  useFetch();
   const data = useAtomValue(dataAtom);
   const [loadedPictures, setLoadedPictures] = useState(false);
 
@@ -54,7 +54,6 @@ function App() {
   return (
     <>
       <LoadingScreen loadedPictures={loadedPictures}></LoadingScreen>
-
       <PictureGenerator onGenerate={handleTexturesGenerated} data={data} />
       <UI />
       {/* <Loader /> */}

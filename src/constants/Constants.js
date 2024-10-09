@@ -5,6 +5,7 @@ export const currentPageAtom = atom(0);
 export const pagesAtom = atom([]);
 export const dataAtom = atom([]);
 export const picturesAtom = atom([]);
+export const changeViewAtom = atom("Initial");
 
 // Función para generar páginas
 export const generatePages = (pictures) => {

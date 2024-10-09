@@ -1,8 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useCursor, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef, useState } from "react";
-import { currentPageAtom, pagesAtom } from "../constants/Constants";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  changeViewAtom,
+  currentPageAtom,
+  pagesAtom,
+} from "../constants/Constants";
 import { PAGE_DEPTH, manualSkinnedMesh } from "../constants/PageGeometry";
 import { pageMaterials } from "../constants/PageMaterials";
 import { SRGBColorSpace } from "three";
@@ -34,6 +38,7 @@ function Page({
       ? [`/textures/BackRoughness.webp`]
       : []),
   ]);
+
   pictureFront.colorSpace = pictureBack.colorSpace = SRGBColorSpace;
 
   const group = useRef();
@@ -43,8 +48,15 @@ function Page({
   const lastPageNumber = pages.length - 1;
   const [highlighted, setHighlighted] = useState(false);
   const setCurrentPage = useSetAtom(currentPageAtom);
+  const setView = useSetAtom(changeViewAtom);
 
   useCursor(highlighted);
+
+  useEffect(() => {
+    if (!bookClosed) {
+      setView("Center");
+    }
+  }, [bookClosed, setView]);
 
   const pageSkinnedMesh = useMemo(() => {
     const materials = pageMaterials(
