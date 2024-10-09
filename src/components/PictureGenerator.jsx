@@ -68,12 +68,7 @@ const generateCanvasTexture = async (
       ctx.drawImage(imagesLoaded[2], 0, 0, width, height);
 
       //Name
-      ctx.font = "900 70px Arial";
-      ctx.fillStyle = "white";
-      ctx.lineWidth = 10;
-      ctx.strokeStyle = "black";
-      ctx.strokeText(data.name.toUpperCase(), 32, 85);
-      ctx.fillText(data.name.toUpperCase(), 32, 85);
+      drawText(ctx, data.name, 260, 32, 85);
 
       //Race
       ctx.font = "bold 45px Arial";
@@ -121,13 +116,13 @@ const generateCanvasTexture = async (
       ctx.drawImage(imagesLoaded[2], 0, 0, width, height);
 
       //Name
-      ctx.font = "900 70px Arial";
-      ctx.fillStyle = "white";
-      ctx.lineWidth = 10;
-      ctx.strokeStyle = "black";
-      ctx.strokeText(data.name.toUpperCase(), 718, 85);
-      ctx.fillText(data.name.toUpperCase(), 718, 85);
-
+      // ctx.font = "900 70px Arial";
+      // ctx.fillStyle = "white";
+      // ctx.lineWidth = 10;
+      // ctx.strokeStyle = "black";
+      // ctx.strokeText(data.name.toUpperCase(), 718, 85);
+      // ctx.fillText(data.name.toUpperCase(), 718, 85);
+      drawText(ctx, data.name, 260, 718, 85);
       //Race
       ctx.font = "bold 45px Arial";
       ctx.fillStyle = "#F2D947";
@@ -234,3 +229,22 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 7) {
     ctx.fillText(lines[i], x, y + i * lineHeight);
   }
 }
+
+const drawText = (ctx, text, maxWidth, x, y) => {
+  let fontSize = 70;
+  ctx.font = `900 ${fontSize}px Arial`;
+
+  let textWidth = ctx.measureText(text).width;
+
+  while (textWidth > maxWidth && fontSize > 10) {
+    fontSize -= 1;
+    ctx.font = `900 ${fontSize}px Arial`;
+    textWidth = ctx.measureText(text).width;
+  }
+
+  ctx.fillStyle = "white";
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = "black";
+  ctx.strokeText(text.toUpperCase(), x, y);
+  ctx.fillText(text.toUpperCase(), x, y);
+};
